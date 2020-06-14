@@ -5,9 +5,11 @@
  */
 package jumpy.grof;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +21,7 @@ public class MapGUI extends javax.swing.JFrame {
     Map map;
     ArrayList<Point> point = new ArrayList<>();
     int colonyMin;
+    int Index=0;
     
     Random rand = new Random();
     int[] place = null;
@@ -26,13 +29,104 @@ public class MapGUI extends javax.swing.JFrame {
     
     public MapGUI() {
         initComponents();
+        map = new Map();
     }
+    public MapGUI(Map map,ArrayList<Point> points,int colonyMin,int[] num) {
+        initComponents();
+        
+        jButton1.setVisible(false);
+        this.map=map;
+        point = points;
+        this.colonyMin=colonyMin;
+        place = new int[point.size()];
+        this.num = new int[point.size()];
+        
+        setup.setVisible(false);
+        updated.setVisible(true);
+        
+        
+        System.out.println(map);
+        
+        p1.setVisible(false);
+        p2.setVisible(false);
+        p3.setVisible(false);
+        p4.setVisible(false);
+        p5.setVisible(false);
+        p6.setVisible(false);
+        p7.setVisible(false);
+        p8.setVisible(false);
+        p9.setVisible(false);
+        p10.setVisible(false);
+        p11.setVisible(false);
+        p12.setVisible(false);
+        p13.setVisible(false);
+        p14.setVisible(false);
+        p15.setVisible(false);
+        p16.setVisible(false);
+        p17.setVisible(false);
+        p18.setVisible(false);
+        p19.setVisible(false);
+        p20.setVisible(false);
+        
+        //set visible chosen places
+        for(int i=1;i<=point.size();i++){
+          
+                String nombor = String.valueOf(i);
+                
+            
+                switch(num[i-1]){
+               
+                case 1: p1.setName(nombor);
+                        p1.setVisible(true); break;
+                case 2: p2.setName(nombor);
+                        p2.setVisible(true); break;
+                case 3: p3.setName(nombor);
+                        p3.setVisible(true); break;
+                case 4: p4.setName(nombor);
+                        p4.setVisible(true); break;
+                case 5: p5.setName(nombor);
+                        p5.setVisible(true); break;
+                case 6: p6.setName(nombor);
+                        p6.setVisible(true); break;
+                case 7: p7.setName(nombor);
+                        p7.setVisible(true); break;
+                case 8: p8.setName(nombor);
+                        p8.setVisible(true); break;
+                case 9: p9.setName(nombor);
+                        p9.setVisible(true); break;
+                case 10: p10.setName(nombor);
+                        p10.setVisible(true); break;
+                case 11: p11.setName(nombor);
+                        p11.setVisible(true); break;
+                case 12: p12.setName(nombor);
+                        p12.setVisible(true); break;
+                case 13: p13.setName(nombor);
+                        p13.setVisible(true); break;
+                case 14: p14.setName(nombor);
+                        p14.setVisible(true); break;
+                case 15: p15.setName(nombor);
+                        p15.setVisible(true); break;
+                case 16: p16.setName(nombor);
+                        p16.setVisible(true); break;
+                case 17: p17.setName(nombor);
+                        p17.setVisible(true); break;
+                case 18: p18.setName(nombor);
+                        p18.setVisible(true); break;
+                case 19: p19.setName(nombor);
+                        p19.setVisible(true); break;
+                case 20: p20.setName(nombor);
+                        p20.setVisible(true); break;
+                }
+        }
+    }
+        
     public MapGUI(Map map,Point[] points,int colonyMin) {
         initComponents();
         
+        this.setVisible(true);
         
-        
-        
+        setup.setVisible(true);
+        updated.setVisible(false);
         
         this.map=map;
         point = new ArrayList<Point>(Arrays.asList(points));
@@ -158,8 +252,8 @@ public class MapGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         p1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         p2 = new javax.swing.JLabel();
         p3 = new javax.swing.JLabel();
         p4 = new javax.swing.JLabel();
@@ -169,9 +263,7 @@ public class MapGUI extends javax.swing.JFrame {
         p6 = new javax.swing.JLabel();
         p7 = new javax.swing.JLabel();
         p10 = new javax.swing.JLabel();
-        p8 = new javax.swing.JLabel();
         p9 = new javax.swing.JLabel();
-        p11 = new javax.swing.JLabel();
         p17 = new javax.swing.JLabel();
         p16 = new javax.swing.JLabel();
         p18 = new javax.swing.JLabel();
@@ -179,376 +271,286 @@ public class MapGUI extends javax.swing.JFrame {
         p13 = new javax.swing.JLabel();
         p14 = new javax.swing.JLabel();
         p20 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        p11 = new javax.swing.JLabel();
+        p8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        updated = new javax.swing.JLabel();
+        setup = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 255, 51));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 102));
-
-        jLabel1.setFont(new java.awt.Font("Yu Gothic", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Map");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         p1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p1.setForeground(new java.awt.Color(0, 0, 0));
-        p1.setText("1");
+        p1.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p1MouseClicked(evt);
             }
         });
+        jPanel1.add(p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 50, 70));
+
+        jLabel1.setFont(new java.awt.Font("Magneto", 2, 80)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("MAP");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 320, 140));
 
         p2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p2.setForeground(new java.awt.Color(0, 0, 0));
+        p2.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p2.setText("2");
         p2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p2MouseClicked(evt);
             }
         });
+        jPanel1.add(p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 50, -1));
 
         p3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p3.setForeground(new java.awt.Color(0, 0, 0));
+        p3.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p3.setText("3");
         p3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p3MouseClicked(evt);
             }
         });
+        jPanel1.add(p3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 50, 60));
 
         p4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p4.setForeground(new java.awt.Color(0, 0, 0));
+        p4.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p4.setText("4");
         p4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p4MouseClicked(evt);
             }
         });
+        jPanel1.add(p4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 50, -1));
 
         p5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p5.setForeground(new java.awt.Color(0, 0, 0));
+        p5.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p5.setText("5");
         p5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p5MouseClicked(evt);
             }
         });
+        jPanel1.add(p5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 50, -1));
 
         p15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p15.setForeground(new java.awt.Color(0, 0, 0));
+        p15.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p15.setText("15");
         p15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p15MouseClicked(evt);
             }
         });
+        jPanel1.add(p15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 570, 50, -1));
 
         p12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p12.setForeground(new java.awt.Color(0, 0, 0));
+        p12.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p12.setText("12");
         p12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p12MouseClicked(evt);
             }
         });
+        jPanel1.add(p12, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 50, -1));
 
         p6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p6.setForeground(new java.awt.Color(0, 0, 0));
+        p6.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p6.setText("6");
         p6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p6MouseClicked(evt);
             }
         });
+        jPanel1.add(p6, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 50, -1));
 
         p7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p7.setForeground(new java.awt.Color(0, 0, 0));
+        p7.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p7.setText("7");
         p7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p7MouseClicked(evt);
             }
         });
+        jPanel1.add(p7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 430, 50, -1));
 
         p10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p10.setForeground(new java.awt.Color(0, 0, 0));
+        p10.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p10.setText("10");
         p10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p10MouseClicked(evt);
             }
         });
-
-        p8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        p8.setForeground(new java.awt.Color(0, 0, 0));
-        p8.setText("8");
-        p8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                p8MouseClicked(evt);
-            }
-        });
+        jPanel1.add(p10, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 170, 50, -1));
 
         p9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p9.setForeground(new java.awt.Color(0, 0, 0));
+        p9.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p9.setText("9");
         p9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p9MouseClicked(evt);
             }
         });
-
-        p11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        p11.setForeground(new java.awt.Color(0, 0, 0));
-        p11.setText("11");
-        p11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                p11MouseClicked(evt);
-            }
-        });
+        jPanel1.add(p9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 520, 50, -1));
 
         p17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p17.setForeground(new java.awt.Color(0, 0, 0));
+        p17.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p17.setText("17");
         p17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p17MouseClicked(evt);
             }
         });
+        jPanel1.add(p17, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 350, 50, 70));
 
         p16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p16.setForeground(new java.awt.Color(0, 0, 0));
+        p16.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p16.setText("16");
         p16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p16MouseClicked(evt);
             }
         });
+        jPanel1.add(p16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 430, 50, -1));
 
         p18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p18.setForeground(new java.awt.Color(0, 0, 0));
+        p18.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p18.setText("18");
         p18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p18MouseClicked(evt);
             }
         });
+        jPanel1.add(p18, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 50, -1));
 
         p19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p19.setForeground(new java.awt.Color(0, 0, 0));
-        p19.setText("19");
+        p19.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p19MouseClicked(evt);
             }
         });
+        jPanel1.add(p19, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 50, 70));
 
         p13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p13.setForeground(new java.awt.Color(0, 0, 0));
+        p13.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p13.setText("13");
         p13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p13MouseClicked(evt);
             }
         });
+        jPanel1.add(p13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 300, 50, -1));
 
         p14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p14.setForeground(new java.awt.Color(0, 0, 0));
+        p14.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p14.setText("14");
         p14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p14MouseClicked(evt);
             }
         });
+        jPanel1.add(p14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 210, 50, -1));
 
         p20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p20.setForeground(new java.awt.Color(0, 0, 0));
+        p20.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
         p20.setText("20");
         p20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 p20MouseClicked(evt);
             }
         });
+        jPanel1.add(p20, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 580, 50, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(p13)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(p5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addComponent(p15)
-                                .addGap(121, 121, 121)
-                                .addComponent(p16)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(p19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(p2)
-                            .addComponent(p18))
-                        .addGap(117, 117, 117)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(p8)
-                        .addGap(98, 98, 98))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(p9)
-                        .addGap(57, 57, 57))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(p17)
-                        .addGap(48, 48, 48))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(p3)
-                            .addComponent(p20))
-                        .addGap(114, 114, 114))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(p14))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(p1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(p4)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(p6)
-                        .addGap(89, 89, 89)
-                        .addComponent(p7)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(p12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(p10)
-                        .addGap(101, 101, 101)
-                        .addComponent(p11)
-                        .addGap(69, 69, 69))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(p3))
-                            .addComponent(p2))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(p8))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(p1))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(p7)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(p9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(p13)
-                                .addGap(21, 21, 21))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(p12)
-                                    .addComponent(p4))
-                                .addGap(44, 44, 44)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(p11)
-                                    .addComponent(p10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(p17)
-                                .addGap(3, 3, 3)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(p14)
-                                    .addComponent(p16))
-                                .addGap(38, 38, 38)
-                                .addComponent(p19)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(p20)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(p15)
-                                        .addGap(73, 73, 73)))
-                                .addGap(59, 59, 59))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(p5)
-                        .addGap(92, 92, 92)
-                        .addComponent(p18)
-                        .addGap(47, 47, 47))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(p6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        p11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        p11.setForeground(new java.awt.Color(0, 0, 0));
+        p11.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
+        p11.setText("11");
+        p11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p11MouseClicked(evt);
+            }
+        });
+        jPanel1.add(p11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 50, -1));
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        p8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        p8.setForeground(new java.awt.Color(0, 0, 0));
+        p8.setIcon(new javax.swing.ImageIcon("C:\\Users\\user\\Downloads\\output-onlinepngtools.png")); // NOI18N
+        p8.setText("8");
+        p8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p8MouseClicked(evt);
+            }
+        });
+        jPanel1.add(p8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 340, 50, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumpy/grof/photo_2020-06-14_11-23-15.jpg"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 700, 700));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
-        );
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 470, 250));
+
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
+
+        jButton1.setText("Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 90, 40));
+
+        updated.setFont(new java.awt.Font("Edwardian Script ITC", 1, 70)); // NOI18N
+        updated.setForeground(new java.awt.Color(153, 0, 51));
+        updated.setText("updated");
+        jPanel1.add(updated, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 180, 90));
+
+        setup.setFont(new java.awt.Font("Edwardian Script ITC", 1, 80)); // NOI18N
+        setup.setForeground(new java.awt.Color(153, 0, 51));
+        setup.setText("setup");
+        jPanel1.add(setup, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -558,118 +560,128 @@ public class MapGUI extends javax.swing.JFrame {
         String nombor = p1.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p1MouseClicked
 
     private void p2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p2MouseClicked
         String nombor = p2.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p2MouseClicked
 
     private void p3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p3MouseClicked
         String nombor = p3.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p3MouseClicked
 
     private void p4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p4MouseClicked
         String nombor = p4.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p4MouseClicked
 
     private void p5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p5MouseClicked
         String nombor = p5.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p5MouseClicked
 
     private void p6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p6MouseClicked
         String nombor = p6.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p6MouseClicked
 
     private void p7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p7MouseClicked
         String nombor = p7.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p7MouseClicked
 
     private void p8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p8MouseClicked
         String nombor = p8.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p8MouseClicked
 
     private void p9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p9MouseClicked
         String nombor = p9.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p9MouseClicked
 
     private void p10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p10MouseClicked
         String nombor = p10.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p10MouseClicked
-
-    private void p11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p11MouseClicked
-        String nombor = p11.getName();
-        int index = Integer.parseInt(nombor)-1;
-        Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
-    }//GEN-LAST:event_p11MouseClicked
+                                   
 
     private void p12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p12MouseClicked
         String nombor = p12.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p12MouseClicked
 
     private void p13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p13MouseClicked
         String nombor = p13.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p13MouseClicked
 
     private void p14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p14MouseClicked
         String nombor = p14.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p14MouseClicked
 
     private void p15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p15MouseClicked
         String nombor = p15.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p15MouseClicked
 
     private void p16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p16MouseClicked
         String nombor = p16.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p16MouseClicked
 
     private void p17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p17MouseClicked
         String nombor = p17.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
+        jTextArea1.setText(p.toString());
         JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p17MouseClicked
 
@@ -677,58 +689,77 @@ public class MapGUI extends javax.swing.JFrame {
         String nombor = p18.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p18MouseClicked
 
     private void p19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p19MouseClicked
         String nombor = p19.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p19MouseClicked
 
     private void p20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p20MouseClicked
         String nombor = p20.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        JOptionPane.showMessageDialog(this,p.toString());
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
     }//GEN-LAST:event_p20MouseClicked
+
+    private void p11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p11MouseClicked
+        String nombor = p11.getName();
+        int index = Integer.parseInt(nombor)-1;
+        Point p = point.get(index);
+        jTextArea1.setText(p.toString());
+//        JOptionPane.showMessageDialog(this,p.toString());
+    }//GEN-LAST:event_p11MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        Map map2 = map;
+        map2.update();
+        MapGUI mapGUI2 = new MapGUI(map2,point,colonyMin,num);
+        mapGUI2.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new MapGUI().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MapGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MapGUI().setVisible(true);
+            }
+        });
+    }
     
     public static boolean checkID(int id, Point[] points)
     {
@@ -742,9 +773,11 @@ public class MapGUI extends javax.swing.JFrame {
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel p1;
@@ -767,5 +800,7 @@ public class MapGUI extends javax.swing.JFrame {
     private javax.swing.JLabel p7;
     private javax.swing.JLabel p8;
     private javax.swing.JLabel p9;
+    private javax.swing.JLabel setup;
+    private javax.swing.JLabel updated;
     // End of variables declaration//GEN-END:variables
 }
