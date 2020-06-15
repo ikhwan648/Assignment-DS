@@ -75,6 +75,14 @@ public class Map
             this.update();
     }
     
+    public ArrayList<Point> getPoint(){
+        return points;
+    }
+    
+    public int getColony(){
+        return colonizationThreshold;
+    }
+    
     // Getter for colonization threshold (DONE)
     public int getThreshold() 
     {

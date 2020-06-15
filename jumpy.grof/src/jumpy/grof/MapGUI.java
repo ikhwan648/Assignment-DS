@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -20,29 +20,145 @@ public class MapGUI extends javax.swing.JFrame {
 
     Map map;
     ArrayList<Point> point = new ArrayList<>();
+    
     int colonyMin;
     int Index=0;
+    
     
     Random rand = new Random();
     int[] place = null;
     int[] num = null;
     
+    //Random map
     public MapGUI() {
         initComponents();
-        map = new Map();
+        
+        this.setTitle("Random Map");
+        this.map = new Map();
+        this.point = map.getPoint();
+        this.colonyMin = map.getColony();
+        
+        place = new int[point.size()];
+        this.num = new int[point.size()];
+        
+        setup.setVisible(false);
+        updated.setVisible(false);
+        random.setVisible(true);
+        
+        System.out.println(map);
+        
+        p1.setVisible(false);
+        p2.setVisible(false);
+        p3.setVisible(false);
+        p4.setVisible(false);
+        p5.setVisible(false);
+        p6.setVisible(false);
+        p7.setVisible(false);
+        p8.setVisible(false);
+        p9.setVisible(false);
+        p10.setVisible(false);
+        p11.setVisible(false);
+        p12.setVisible(false);
+        p13.setVisible(false);
+        p14.setVisible(false);
+        p15.setVisible(false);
+        p16.setVisible(false);
+        p17.setVisible(false);
+        p18.setVisible(false);
+        p19.setVisible(false);
+        p20.setVisible(false);
+        
+        
+        
+        //generate unique place
+        for(int i=0;i<point.size();i++){
+            num[i] = 1+rand.nextInt(20);
+            
+            for(int j=0;j<i;j++){
+                if(num[i]==num[j])
+                    i--;
+            }
+        }
+        
+        
+        
+        
+        //set visible chosen places
+        for(int i=1;i<=point.size();i++){
+          
+                String nombor = String.valueOf(i);
+                
+            
+                switch(num[i-1]){
+               
+                case 1: p1.setName(nombor);
+                        p1.setVisible(true); break;
+                case 2: p2.setName(nombor);
+                        p2.setVisible(true); break;
+                case 3: p3.setName(nombor);
+                        p3.setVisible(true); break;
+                case 4: p4.setName(nombor);
+                        p4.setVisible(true); break;
+                case 5: p5.setName(nombor);
+                        p5.setVisible(true); break;
+                case 6: p6.setName(nombor);
+                        p6.setVisible(true); break;
+                case 7: p7.setName(nombor);
+                        p7.setVisible(true); break;
+                case 8: p8.setName(nombor);
+                        p8.setVisible(true); break;
+                case 9: p9.setName(nombor);
+                        p9.setVisible(true); break;
+                case 10: p10.setName(nombor);
+                        p10.setVisible(true); break;
+                case 11: p11.setName(nombor);
+                        p11.setVisible(true); break;
+                case 12: p12.setName(nombor);
+                        p12.setVisible(true); break;
+                case 13: p13.setName(nombor);
+                        p13.setVisible(true); break;
+                case 14: p14.setName(nombor);
+                        p14.setVisible(true); break;
+                case 15: p15.setName(nombor);
+                        p15.setVisible(true); break;
+                case 16: p16.setName(nombor);
+                        p16.setVisible(true); break;
+                case 17: p17.setName(nombor);
+                        p17.setVisible(true); break;
+                case 18: p18.setName(nombor);
+                        p18.setVisible(true); break;
+                case 19: p19.setName(nombor);
+                        p19.setVisible(true); break;
+                case 20: p20.setName(nombor);
+                        p20.setVisible(true); break;
+                }
+                
+           
+            
+            
+        }
+        
     }
+    
+    //updated map
     public MapGUI(Map map,ArrayList<Point> points,int colonyMin,int[] num) {
         initComponents();
         
+        
+        
+        this.setTitle("Updated Map");
         jButton1.setVisible(false);
         this.map=map;
         point = points;
+        
+        
         this.colonyMin=colonyMin;
         place = new int[point.size()];
         this.num = new int[point.size()];
         
         setup.setVisible(false);
         updated.setVisible(true);
+        random.setVisible(false);
         
         
         System.out.println(map);
@@ -120,13 +236,16 @@ public class MapGUI extends javax.swing.JFrame {
         }
     }
         
+    //setup map
     public MapGUI(Map map,Point[] points,int colonyMin) {
         initComponents();
         
-        this.setVisible(true);
+        this.setTitle("Setup Map");
+        this.num =num;
         
         setup.setVisible(true);
         updated.setVisible(false);
+        random.setVisible(false);
         
         this.map=map;
         point = new ArrayList<Point>(Arrays.asList(points));
@@ -280,11 +399,12 @@ public class MapGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         updated = new javax.swing.JLabel();
         setup = new javax.swing.JLabel();
+        random = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 255, 51));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 102));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         p1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -295,12 +415,12 @@ public class MapGUI extends javax.swing.JFrame {
                 p1MouseClicked(evt);
             }
         });
-        jPanel1.add(p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 50, 70));
+        jPanel1.add(p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 50, 70));
 
         jLabel1.setFont(new java.awt.Font("Magneto", 2, 80)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("MAP");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 320, 140));
+        jLabel1.setText("MAP ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 320, 140));
 
         p2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p2.setForeground(new java.awt.Color(0, 0, 0));
@@ -311,7 +431,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p2MouseClicked(evt);
             }
         });
-        jPanel1.add(p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 390, 50, -1));
+        jPanel1.add(p2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 50, -1));
 
         p3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p3.setForeground(new java.awt.Color(0, 0, 0));
@@ -333,7 +453,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p4MouseClicked(evt);
             }
         });
-        jPanel1.add(p4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 50, -1));
+        jPanel1.add(p4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 170, 50, -1));
 
         p5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p5.setForeground(new java.awt.Color(0, 0, 0));
@@ -344,7 +464,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p5MouseClicked(evt);
             }
         });
-        jPanel1.add(p5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 50, -1));
+        jPanel1.add(p5, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 310, 50, -1));
 
         p15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p15.setForeground(new java.awt.Color(0, 0, 0));
@@ -355,7 +475,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p15MouseClicked(evt);
             }
         });
-        jPanel1.add(p15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 570, 50, -1));
+        jPanel1.add(p15, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 440, 50, -1));
 
         p12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p12.setForeground(new java.awt.Color(0, 0, 0));
@@ -366,7 +486,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p12MouseClicked(evt);
             }
         });
-        jPanel1.add(p12, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 50, -1));
+        jPanel1.add(p12, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, -10, 50, -1));
 
         p6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p6.setForeground(new java.awt.Color(0, 0, 0));
@@ -377,7 +497,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p6MouseClicked(evt);
             }
         });
-        jPanel1.add(p6, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 490, 50, -1));
+        jPanel1.add(p6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 410, 50, -1));
 
         p7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p7.setForeground(new java.awt.Color(0, 0, 0));
@@ -388,7 +508,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p7MouseClicked(evt);
             }
         });
-        jPanel1.add(p7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 430, 50, -1));
+        jPanel1.add(p7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 480, 50, -1));
 
         p10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p10.setForeground(new java.awt.Color(0, 0, 0));
@@ -399,7 +519,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p10MouseClicked(evt);
             }
         });
-        jPanel1.add(p10, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 170, 50, -1));
+        jPanel1.add(p10, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 120, 50, -1));
 
         p9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p9.setForeground(new java.awt.Color(0, 0, 0));
@@ -410,7 +530,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p9MouseClicked(evt);
             }
         });
-        jPanel1.add(p9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 520, 50, -1));
+        jPanel1.add(p9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 50, -1));
 
         p17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p17.setForeground(new java.awt.Color(0, 0, 0));
@@ -421,7 +541,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p17MouseClicked(evt);
             }
         });
-        jPanel1.add(p17, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 350, 50, 70));
+        jPanel1.add(p17, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 450, 50, 70));
 
         p16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p16.setForeground(new java.awt.Color(0, 0, 0));
@@ -432,7 +552,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p16MouseClicked(evt);
             }
         });
-        jPanel1.add(p16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 430, 50, -1));
+        jPanel1.add(p16, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 350, 50, -1));
 
         p18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p18.setForeground(new java.awt.Color(0, 0, 0));
@@ -443,7 +563,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p18MouseClicked(evt);
             }
         });
-        jPanel1.add(p18, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, 50, -1));
+        jPanel1.add(p18, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 50, -1));
 
         p19.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p19.setForeground(new java.awt.Color(0, 0, 0));
@@ -453,7 +573,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p19MouseClicked(evt);
             }
         });
-        jPanel1.add(p19, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 50, 70));
+        jPanel1.add(p19, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, -10, 50, 70));
 
         p13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p13.setForeground(new java.awt.Color(0, 0, 0));
@@ -464,7 +584,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p13MouseClicked(evt);
             }
         });
-        jPanel1.add(p13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 300, 50, -1));
+        jPanel1.add(p13, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 210, 50, -1));
 
         p14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p14.setForeground(new java.awt.Color(0, 0, 0));
@@ -475,7 +595,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p14MouseClicked(evt);
             }
         });
-        jPanel1.add(p14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 210, 50, -1));
+        jPanel1.add(p14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 270, 50, -1));
 
         p20.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p20.setForeground(new java.awt.Color(0, 0, 0));
@@ -486,7 +606,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p20MouseClicked(evt);
             }
         });
-        jPanel1.add(p20, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 580, 50, -1));
+        jPanel1.add(p20, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 530, 50, -1));
 
         p11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p11.setForeground(new java.awt.Color(0, 0, 0));
@@ -497,7 +617,7 @@ public class MapGUI extends javax.swing.JFrame {
                 p11MouseClicked(evt);
             }
         });
-        jPanel1.add(p11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 50, -1));
+        jPanel1.add(p11, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 50, 50, -1));
 
         p8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         p8.setForeground(new java.awt.Color(0, 0, 0));
@@ -508,16 +628,16 @@ public class MapGUI extends javax.swing.JFrame {
                 p8MouseClicked(evt);
             }
         });
-        jPanel1.add(p8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 340, 50, -1));
+        jPanel1.add(p8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 400, 50, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jumpy/grof/photo_2020-06-14_11-23-15.jpg"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 700, 700));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 700, 630));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 470, 250));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 470, 250));
 
         jLabel2.setText("jLabel2");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, -1, -1));
@@ -528,17 +648,22 @@ public class MapGUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 90, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 90, 40));
 
         updated.setFont(new java.awt.Font("Edwardian Script ITC", 1, 70)); // NOI18N
         updated.setForeground(new java.awt.Color(153, 0, 51));
-        updated.setText("updated");
-        jPanel1.add(updated, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 180, 90));
+        updated.setText("updated ");
+        jPanel1.add(updated, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 180, 90));
 
         setup.setFont(new java.awt.Font("Edwardian Script ITC", 1, 80)); // NOI18N
         setup.setForeground(new java.awt.Color(153, 0, 51));
-        setup.setText("setup");
-        jPanel1.add(setup, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 190, -1));
+        setup.setText("setup ");
+        jPanel1.add(setup, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 190, -1));
+
+        random.setFont(new java.awt.Font("Goudy Stout", 1, 48)); // NOI18N
+        random.setForeground(new java.awt.Color(0, 51, 51));
+        random.setText("RANDOM");
+        jPanel1.add(random, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -548,9 +673,7 @@ public class MapGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -559,81 +682,73 @@ public class MapGUI extends javax.swing.JFrame {
     private void p1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p1MouseClicked
         String nombor = p1.getName();
         int index = Integer.parseInt(nombor)-1;
+        
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
+        
     }//GEN-LAST:event_p1MouseClicked
 
     private void p2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p2MouseClicked
         String nombor = p2.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p2MouseClicked
 
     private void p3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p3MouseClicked
         String nombor = p3.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p3MouseClicked
 
     private void p4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p4MouseClicked
         String nombor = p4.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p4MouseClicked
 
     private void p5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p5MouseClicked
         String nombor = p5.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p5MouseClicked
 
     private void p6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p6MouseClicked
         String nombor = p6.getName();
         int index = Integer.parseInt(nombor)-1;
-        Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+       Point p = point.get(index);
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p6MouseClicked
 
     private void p7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p7MouseClicked
         String nombor = p7.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p7MouseClicked
 
     private void p8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p8MouseClicked
         String nombor = p8.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p8MouseClicked
 
     private void p9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p9MouseClicked
         String nombor = p9.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p9MouseClicked
 
     private void p10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p10MouseClicked
         String nombor = p10.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p10MouseClicked
                                    
 
@@ -641,88 +756,82 @@ public class MapGUI extends javax.swing.JFrame {
         String nombor = p12.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p12MouseClicked
 
     private void p13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p13MouseClicked
         String nombor = p13.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p13MouseClicked
 
     private void p14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p14MouseClicked
         String nombor = p14.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p14MouseClicked
 
     private void p15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p15MouseClicked
         String nombor = p15.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p15MouseClicked
 
     private void p16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p16MouseClicked
         String nombor = p16.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p16MouseClicked
 
     private void p17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p17MouseClicked
         String nombor = p17.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p17MouseClicked
 
     private void p18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p18MouseClicked
         String nombor = p18.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p18MouseClicked
 
     private void p19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p19MouseClicked
         String nombor = p19.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p19MouseClicked
 
     private void p20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p20MouseClicked
         String nombor = p20.getName();
         int index = Integer.parseInt(nombor)-1;
         Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+            jTextArea1.setText(p.toString());
     }//GEN-LAST:event_p20MouseClicked
 
     private void p11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p11MouseClicked
         String nombor = p11.getName();
         int index = Integer.parseInt(nombor)-1;
-        Point p = point.get(index);
-        jTextArea1.setText(p.toString());
-//        JOptionPane.showMessageDialog(this,p.toString());
+        
+            Point p = point.get(index);
+            jTextArea1.setText(p.toString());
+        
     }//GEN-LAST:event_p11MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         Map map2 = map;
         map2.update();
-        MapGUI mapGUI2 = new MapGUI(map2,point,colonyMin,num);
+        MapGUI mapGUI2 = new MapGUI(map2,map2.getPoint(),map2.getColony(),num);
         mapGUI2.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -800,6 +909,7 @@ public class MapGUI extends javax.swing.JFrame {
     private javax.swing.JLabel p7;
     private javax.swing.JLabel p8;
     private javax.swing.JLabel p9;
+    private javax.swing.JLabel random;
     private javax.swing.JLabel setup;
     private javax.swing.JLabel updated;
     // End of variables declaration//GEN-END:variables
