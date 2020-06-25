@@ -11,7 +11,10 @@ public class Map
     private ArrayList<Boolean> counter = new ArrayList<>();
 
     // Constructor (DONE)
-    public Map() {this(null, -69);}
+    public Map() 
+    {
+        this(null, -69);
+    }
     public Map(Point[] spots, int colonizationThreshold)
     {
         // If randomly generated
@@ -25,7 +28,7 @@ public class Map
 
                 // Ensure that the points' id is unique
                 while(true)
-                    if(this.contain(point.getID())) 
+                    if(this.isIDTaken(point.getID())) 
                         point.setID(RAND.nextInt(1001));
                     else 
                         break;
@@ -33,9 +36,9 @@ public class Map
                 // Add the point to the list
                 this.points.add(point);
             }
-            
-            // The random colonization threshold is between 6 and 12
-            this.colonizationThreshold = 6 + RAND.nextInt(7);
+            // The random colonization threshold is between 6 and 12 & a more deterministic colonizationThreshold value
+            // Six is a crowd
+            this.colonizationThreshold = Math.min(6 + RAND.nextInt(7), getKangarooCount()/this.points.size() + 5);
         }
         else
         {
@@ -43,17 +46,34 @@ public class Map
             this.points = new ArrayList<Point>(Arrays.asList(spots));
             this.colonizationThreshold = colonizationThreshold;
         }
+
+        // Establish link between points
+        // Prioritize the points that is specified by the user first
+        // It will connect the points that exist with the corresponding ID but ignore ones that don't exist
+        for(int i = 0; i < this.points.size(); i++)
+        {
+            if(this.points.get(i).haveSpecifiedID())
+            {
+                for(int index = (i + 1) % this.points.size(), j = 0; j < this.points.size() - 1; j++, index = (index + 1) % this.points.size())
+                {
+                    if(this.points.get(i).containSpecifiedID(this.points.get(index)))
+                        this.points.get(i).makeLink(this.points.get(index));
+                }
+            }
+        }
         
         // Link the points together 
         for(int i = 0; i < this.points.size(); i++)
-            for(int j = 0; j < this.points.size(); j++)
-                if(this.points.get(i).linkIsFull() == false && this.points.get(i).equals(this.points.get(j)) == false)
-                    this.points.get(i).makeLink(this.points.get(j % this.points.size()));
-                else if(this.points.get(i).linkIsFull() == true)
+        {
+            for(int index = (i + 1) % this.points.size(), j = 0; j < this.points.size() - 1; j++, index = (index + 1) % this.points.size())
+            {
+                if(this.points.get(i).linkIsFull() == true)
                     break;
+                else if(this.points.get(i).containSpecifiedID(this.points.get(index)) == false)
+                    this.points.get(i).makeLink(this.points.get(index));
+            }
+        }
     }
-
-    
 
     // Recursive method that stop when there is no change (DONE)
     public void update()
@@ -70,17 +90,9 @@ public class Map
             for(int i = points.size() - 1; i >= 0; i--)
                 this.counter.add(points.get(i).update(this.colonizationThreshold));
         
-        // Check if there is no movement
+        // Check if there is movement
         if(this.counter.contains(true))
             this.update();
-    }
-    
-    public ArrayList<Point> getPoint(){
-        return points;
-    }
-    
-    public int getColony(){
-        return colonizationThreshold;
     }
     
     // Getter for colonization threshold (DONE)
@@ -95,17 +107,24 @@ public class Map
     {
         String result = "";
         for(int i = 0; i < points.size(); i++) 
-            result += "Point " + (i + 1) + ": \n" + points.get(i).toString() + "\n";
+            result += "Point " + (i + 1) + "\n" + points.get(i).toString() + "\n";
         return result;
     }
-    
-    
     
     //Helper Methods
     /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
     
+    // Count the number of kangaroos in this map (DONE)
+    public int getKangarooCount()
+    {
+        int sum = 0;
+        for(int i = 0; i < this.points.size(); i++)
+            sum += this.points.get(i).getPointCapacity();
+        return sum;
+    }
+
     // Check whether the id is unique (DONE)
-    public boolean contain(int id)
+    public boolean isIDTaken(int id)
     {
         for(Point point : this.points)
             if(point.getID() == id)
