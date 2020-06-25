@@ -11,11 +11,18 @@ public class Link implements Comparable<Link>
     // Constructor (DONE)
     public Link(Point point) 
     {
-        // Assign the give point 
+        this(point, -69);
+    }
+    public Link(Point point, int obstacle)
+    {
+        // Assign the given point 
         this.point = point;
         
         // Set the obstacle to a random value between 1 and 6
-        this.obstacle = 1 + RAND.nextInt(6);
+        if(obstacle == -69)
+            this.obstacle = 1 + RAND.nextInt(6);
+        else
+            this.obstacle = obstacle;
         
         //Initalize the heuristic value
         this.heuristic = 0;
@@ -23,13 +30,11 @@ public class Link implements Comparable<Link>
     
     // Setter and getter for point (DONE)
     public Point getPoint() {return this.point;}
-    public void setPoint(Point point) {this.point = point;}
 
     // Setter and getter for obstacle (DONE)
     public int getObstacle() {return this.obstacle;}
-    public void setObstacle(int obstacle) {this.obstacle = obstacle;}
     
-    // Set and get the heuristic value (bigger value is better) (-69 is special value that indicats that it cannot traverse this link) (DONE)
+    // Set and get the heuristic value (bigger value is better) (DONE)
     public double getHeuristic() {return this.heuristic;}
     public void setHeuristic(Kangaroo kangaroo)
     {
@@ -47,8 +52,11 @@ public class Link implements Comparable<Link>
     @Override
     public int compareTo(Link that) 
     {
-        if(this.heuristic > that.heuristic) return 1;
-        else if(this.heuristic == that.heuristic) return 0;
-        else return -1;
+        if(this.heuristic > that.heuristic) 
+            return 1;
+        else if(this.heuristic == that.heuristic) 
+            return 0;
+        else 
+            return -1;
     }
 }
